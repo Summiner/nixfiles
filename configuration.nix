@@ -100,7 +100,6 @@
       vscodium
       anydesk
       termius
-      # alejandra
     ];
 
     programs.direnv.enable = true;
@@ -157,7 +156,13 @@
     caddy # convenient bloated web server
     parallel # --citation
     nix-tree # nix what-depends why-depends who-am-i
+    libayatana-appindicator
+    gnomeExtensions.appindicator
+    easyeffects
+    gnomeExtensions.easyeffects-preset-selector
   ];
+
+  services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
