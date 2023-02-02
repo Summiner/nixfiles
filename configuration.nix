@@ -1,16 +1,22 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, lib, inputs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./sound.nix
-      ./fonts.nix
-    ];
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./modules/nix.nix
+    ./hardware-configuration.nix
+    ./sound.nix
+    ./fonts.nix
+    ./modules/git.nix
+    ./modules/steam.nix
+  ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -19,7 +25,7 @@
   networking.hostName = "uridesk"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "America/Argentina/Buenos_Aires";
@@ -45,7 +51,6 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.displayManager.gdm.wayland = true;
   services.xserver.desktopManager.gnome.enable = true;
-  
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -69,29 +74,55 @@
   users.users.uri = {
     isNormalUser = true;
     createHome = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
+    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
+  };
+
+  security.polkit.enable = true;
+
+  home-manager.users.uri = {
+    config,
+    lib,
+    ...
+  }: {
+    home.stateVersion = "22.11";
+    imports = [inputs.nix-doom-emacs.hmModule];
+
+    home.file.".rustup/settings.toml".source = (pkgs.formats.toml {}).generate "rustup-default.toml" {
+      default_toolchain = "nightly";
+      profile = "default";
+      version = "12";
+    };
+
+    home.packages = with pkgs; [
       firefox
       thunderbird
       discord
       vscodium
+      anydesk
+      termius
+      # alejandra
     ];
-  };
 
-  home-manager.users.uri = {config, lib, ...}: {
-    home.stateVersion = "22.11";
-    imports = [ inputs.nix-doom-emacs.hmModule ];
+    programs.direnv.enable = true;
+    programs.direnv.enableBashIntegration = true;
+    programs.bash.enable = true;
+
     programs.doom-emacs = {
+      # emacsPackages = with inputs.emacs-overlay.packages.${config.nixpkgs.system};
+      #   emacsPackagesFor emacsGit;
       enable = true;
       doomPrivateDir = ./doom.d; # Directory containing your config.el, init.el
-                                    # and packages.el files
+      # and packages.el files
     };
   };
 
   nixpkgs.config.allowUnfree = true;
+  # programs.cnping.enable = true;
 
-  programs.steam.enable = true;
-  programs.git.enable = true;
+  services.flatpak.enable = true;
+  cookiecutie.git.enable = true;
+  uri.steam.enable = true;
+  # programs.git.enable = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -102,30 +133,30 @@
     tree
     neofetch
     killall
-      htop
-      file
-      inetutils
-      binutils-unwrapped
-      psmisc
-      pciutils
-      usbutils
-      dig
-      asciinema
-      ripgrep # a better grep
-      unzip
-      ncdu_1 # _2 only supports modern microarchs
-      fd # a better find
-      hyperfine # a better time
-      mtr # a better traceroute
-      tmux # when you can't afford i3
-      youtube-dl
-      yt-dlp # do some pretendin' and fetch videos
-      jq # like 'node -e' but nicer
-      btop # htop on steroids
-      expect # color capture, galore
-      caddy # convenient bloated web server
-      parallel # --citation
-      nix-tree # nix what-depends why-depends who-am-i
+    htop
+    file
+    inetutils
+    binutils-unwrapped
+    psmisc
+    pciutils
+    usbutils
+    dig
+    asciinema
+    ripgrep # a better grep
+    unzip
+    ncdu_1 # _2 only supports modern microarchs
+    fd # a better find
+    hyperfine # a better time
+    mtr # a better traceroute
+    tmux # when you can't afford i3
+    youtube-dl
+    yt-dlp # do some pretendin' and fetch videos
+    jq # like 'node -e' but nicer
+    btop # htop on steroids
+    expect # color capture, galore
+    caddy # convenient bloated web server
+    parallel # --citation
+    nix-tree # nix what-depends why-depends who-am-i
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -159,6 +190,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.11"; # Did you read the comment?
-
 }
-
