@@ -16,6 +16,7 @@
     ./fonts.nix
     ./modules/git.nix
     ./modules/steam.nix
+    ./modules/vscode.nix
   ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
   # Use the systemd-boot EFI boot loader.
@@ -97,7 +98,6 @@
       firefox
       thunderbird
       discord
-      vscodium
       anydesk
       termius
     ];
@@ -121,6 +121,7 @@
   services.flatpak.enable = true;
   cookiecutie.git.enable = true;
   uri.steam.enable = true;
+  uri.vscode.enable = true;
   # programs.git.enable = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
