@@ -17,6 +17,7 @@
     ./modules/git.nix
     ./modules/steam.nix
     ./modules/vscode.nix
+    ./modules/jetbrains.nix
   ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
   # Use the systemd-boot EFI boot loader.
@@ -95,11 +96,13 @@
     };
 
     home.packages = with pkgs; [
-      firefox
+      firefox-wayland
       thunderbird
       discord
       anydesk
       termius
+      inkscape-with-extensions
+      xorg.xeyes
     ];
 
     programs.direnv.enable = true;
@@ -113,6 +116,10 @@
       doomPrivateDir = ./doom.d; # Directory containing your config.el, init.el
       # and packages.el files
     };
+
+    home.sessionVariables = {
+      MOZ_ENABLE_WAYLAND = 1;
+    };
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -122,6 +129,7 @@
   cookiecutie.git.enable = true;
   uri.steam.enable = true;
   uri.vscode.enable = true;
+  uri.jetbrains.enable = true;
   # programs.git.enable = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -164,6 +172,16 @@
   ];
 
   services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
+
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
+      ];
+      # gtkUsePortal = true;
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
