@@ -101,9 +101,18 @@
       inkscape-with-extensions
       xorg.xeyes
       prismlauncher
-      flatbuffers
       element-desktop
+      mpv
+      qbittorrent
     ];
+
+    xdg.enable = true;
+    xdg.mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "video" = ["mpv.desktop"];
+      };
+    };
 
     programs.direnv.enable = true;
     programs.direnv.enableBashIntegration = true;
