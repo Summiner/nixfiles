@@ -18,6 +18,9 @@
     ./modules/steam.nix
     ./modules/vscode.nix
     ./modules/jetbrains.nix
+    ./modules/js.nix
+    ./modules/java.nix
+    ./modules/rust.nix
   ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
   # Use the systemd-boot EFI boot loader.
@@ -89,12 +92,6 @@
     home.stateVersion = "22.11";
     imports = [inputs.nix-doom-emacs.hmModule];
 
-    home.file.".rustup/settings.toml".source = (pkgs.formats.toml {}).generate "rustup-default.toml" {
-      default_toolchain = "nightly";
-      profile = "default";
-      version = "12";
-    };
-
     home.packages = with pkgs; [
       firefox-wayland
       thunderbird
@@ -103,6 +100,7 @@
       termius
       inkscape-with-extensions
       xorg.xeyes
+      prismlauncher
     ];
 
     programs.direnv.enable = true;
@@ -130,14 +128,15 @@
   uri.steam.enable = true;
   uri.vscode.enable = true;
   uri.jetbrains.enable = true;
+  uri.rust.enable = true;
+  uri.java.enable = true;
+  uri.javascript.enable = true;
   # programs.git.enable = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim-full # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
-    rustup
-    deno
     tree
     neofetch
     killall
@@ -166,6 +165,10 @@
     parallel # --citation
     nix-tree # nix what-depends why-depends who-am-i
     libayatana-appindicator
+    wl-clipboard
+    wev
+    wl-mirror
+    wl-color-picker
     gnomeExtensions.appindicator
     easyeffects
     gnomeExtensions.easyeffects-preset-selector

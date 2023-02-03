@@ -23,6 +23,9 @@ in
               jnoortheen.nix-ide
               kamadorueda.alejandra
               dbaeumer.vscode-eslint
+              redhat.vscode-xml
+              esbenp.prettier-vscode
+              eamodio.gitlens
             ]
             ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
               {
