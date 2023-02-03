@@ -172,6 +172,7 @@
     gnomeExtensions.appindicator
     easyeffects
     gnomeExtensions.easyeffects-preset-selector
+    remmina
   ];
 
   services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
