@@ -101,6 +101,7 @@
       inkscape-with-extensions
       xorg.xeyes
       prismlauncher
+      flatbuffers
     ];
 
     programs.direnv.enable = true;
