@@ -104,6 +104,8 @@
       element-desktop
       mpv
       qbittorrent
+      spotify-qt
+      spotify
     ];
 
     xdg.enable = true;
