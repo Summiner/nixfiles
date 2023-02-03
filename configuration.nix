@@ -102,6 +102,7 @@
       xorg.xeyes
       prismlauncher
       flatbuffers
+      element-desktop
     ];
 
     programs.direnv.enable = true;
