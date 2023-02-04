@@ -19,6 +19,7 @@ in
           extensions = with pkgs.vscode-extensions;
             [
               jnoortheen.nix-ide
+              mkhl.direnv
               kamadorueda.alejandra
               eamodio.gitlens
               redhat.vscode-xml
