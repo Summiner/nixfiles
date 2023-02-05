@@ -21,6 +21,7 @@ in
 
         home.packages = with pkgs; [
           rustup
+          crate2nix
         ];
       };
     };
