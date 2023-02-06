@@ -79,7 +79,7 @@
   users.users.uri = {
     isNormalUser = true;
     createHome = true;
-    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel" "input"]; # Enable ‘sudo’ for the user.
   };
 
   security.polkit.enable = true;
@@ -186,9 +186,13 @@
     easyeffects
     gnomeExtensions.easyeffects-preset-selector
     remmina
+    vulkan-headers
+    vulkan-loader
+    vulkan-tools
   ];
 
   services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
+  services.upower.enable = true;
 
   xdg = {
     portal = {
