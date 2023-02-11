@@ -70,7 +70,12 @@ in
       (mkIf cfg.pipewire.enable (let
         inherit (cfg.pipewire) quantum rate;
       in {
-        environment.systemPackages = with pkgs; [helvum easyeffects];
+        environment.systemPackages = with pkgs; [
+          # helvum
+          pavucontrol
+          pulseaudio
+          easyeffects
+        ];
 
         security.rtkit.enable = true;
         services.pipewire = {

@@ -107,6 +107,7 @@
       qbittorrent
       spotify-qt
       spotify
+      appimage-run
     ];
 
     xdg.enable = true;
@@ -149,6 +150,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    chromium
     vim-full # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     tree
@@ -190,6 +192,7 @@
     vulkan-headers
     vulkan-loader
     vulkan-tools
+    sidequest
   ];
 
   services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
