@@ -13,7 +13,7 @@
   ];
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"];
-  boot.initrd.kernelModules = [];
+  boot.initrd.kernelModules = ["amdgpu"];
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
   #hardware.cpu.amd.updateMicrocode = true;
@@ -47,14 +47,10 @@
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   ### AMD STUFF
-  hardware.opengl.extraPackages = [
-    pkgs.amdvlk
-  ];
+  hardware.opengl.driSupport = true;
 
   # To enable Vulkan support for 32-bit applications, also add:
-  hardware.opengl.extraPackages32 = [
-    pkgs.driversi686Linux.amdvlk
-  ];
+  hardware.opengl.driSupport32Bit = true;
 
   # Force radv
   environment.variables.AMD_VULKAN_ICD = "RADV";

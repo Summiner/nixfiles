@@ -51,6 +51,7 @@
   #.x.enable = true;
   programs.xwayland.enable = true;
   services.xserver.enable = true;
+  services.xserver.videoDrivers = ["amdgpu"];
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
