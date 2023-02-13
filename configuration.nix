@@ -111,6 +111,8 @@
       appimage-run
       flatpak-builder
       python3Full
+      python310Packages.toml
+      python310Packages.aiohttp
       pipx
     ];
 
