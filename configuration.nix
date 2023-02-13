@@ -109,6 +109,9 @@
       spotify-qt
       spotify
       appimage-run
+      flatpak-builder
+      python3Full
+      pipx
     ];
 
     xdg.enable = true;
