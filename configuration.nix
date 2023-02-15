@@ -114,6 +114,8 @@
       python310Packages.toml
       python310Packages.aiohttp
       pipx
+      gimp
+      aegisub
     ];
 
     xdg.enable = true;
