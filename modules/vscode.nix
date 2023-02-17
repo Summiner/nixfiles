@@ -24,6 +24,7 @@ in
               eamodio.gitlens
               redhat.vscode-xml
               editorconfig.editorconfig
+              oderwat.indent-rainbow
               # Javascript
               dbaeumer.vscode-eslint
               esbenp.prettier-vscode
