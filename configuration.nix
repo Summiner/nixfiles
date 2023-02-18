@@ -81,7 +81,7 @@
   users.users.uri = {
     isNormalUser = true;
     createHome = true;
-    extraGroups = ["wheel" "input"]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel" "input" "adbusers"]; # Enable ‘sudo’ for the user.
   };
 
   security.polkit.enable = true;
@@ -154,6 +154,7 @@
   uri.rust.enable = true;
   uri.java.enable = true;
   uri.javascript.enable = true;
+  programs.adb.enable = true;
   # programs.git.enable = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
