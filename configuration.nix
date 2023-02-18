@@ -21,6 +21,7 @@
     ./modules/js.nix
     ./modules/java.nix
     ./modules/rust.nix
+    ./modules/obs.nix
   ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
   # Use the systemd-boot EFI boot loader.
@@ -154,6 +155,7 @@
   uri.rust.enable = true;
   uri.java.enable = true;
   uri.javascript.enable = true;
+  uri.obs.enable = true;
   programs.adb.enable = true;
   # programs.git.enable = true;
   # List packages installed in system profile. To search, run:
