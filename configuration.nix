@@ -205,6 +205,13 @@
     vulkan-loader
     vulkan-tools
     sidequest
+
+    # wine-staging (version with experimental features)
+    wineWowPackages.staging
+    # winetricks (all versions)
+    winetricks
+    # native wayland support (unstable)
+    wineWowPackages.waylandFull
   ];
 
   services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
