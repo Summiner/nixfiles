@@ -74,6 +74,8 @@
   #sound.enable = true;
   #services.pipewire.enable = true;
   hardware.pulseaudio.enable = lib.mkForce false;
+  hardware.logitech.wireless.enable = true;
+  hardware.logitech.wireless.enableGraphical = true;
   cookiecutie.sound.pipewire.enable = true;
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
@@ -82,7 +84,7 @@
   users.users.uri = {
     isNormalUser = true;
     createHome = true;
-    extraGroups = ["wheel" "input" "adbusers"]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel" "input" "adbusers" "plugdev"]; # Enable ‘sudo’ for the user.
   };
 
   security.polkit.enable = true;
@@ -212,6 +214,12 @@
     winetricks
     # native wayland support (unstable)
     wineWowPackages.waylandFull
+
+    (lutris.override {
+      extraLibraries = pkgs: [
+        # List library dependencies here
+      ];
+    })
   ];
 
   services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
