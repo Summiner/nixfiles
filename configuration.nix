@@ -210,7 +210,6 @@
     vulkan-loader
     vulkan-tools
     sidequest
-    postscript-lexmark
 
     # wine-staging (version with experimental features)
     wineWowPackages.staging
