@@ -69,6 +69,9 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  services.printing.drivers = with pkgs; [
+    postscript-lexmark
+  ];
 
   # Enable sound.
   #sound.enable = true;
@@ -207,6 +210,7 @@
     vulkan-loader
     vulkan-tools
     sidequest
+    postscript-lexmark
 
     # wine-staging (version with experimental features)
     wineWowPackages.staging
