@@ -19,6 +19,7 @@ in
           extensions = with pkgs.vscode-extensions;
             [
               jnoortheen.nix-ide
+              # mkhl.direnv
               arrterian.nix-env-selector
               kamadorueda.alejandra
               eamodio.gitlens
