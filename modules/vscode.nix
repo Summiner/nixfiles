@@ -26,6 +26,7 @@ in
               redhat.vscode-xml
               editorconfig.editorconfig
               oderwat.indent-rainbow
+              davidanson.vscode-markdownlint
               # Javascript
               dbaeumer.vscode-eslint
               esbenp.prettier-vscode
