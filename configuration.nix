@@ -162,6 +162,8 @@
   uri.javascript.enable = true;
   uri.obs.enable = true;
   programs.adb.enable = true;
+  programs.nix-ld.enable = true;
+  programs.gamemode.enable = true;
   # programs.git.enable = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -217,6 +219,7 @@
     winetricks
     # native wayland support (unstable)
     wineWowPackages.waylandFull
+    dxvk
 
     (lutris.override {
       extraLibraries = pkgs: [
