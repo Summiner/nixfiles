@@ -124,6 +124,10 @@
       aegisub
     ];
 
+    home.sessionVariables = {
+      MESA_DISK_CACHE_SINGLE_FILE = "1";
+    };
+
     xdg.enable = true;
     xdg.mimeApps = {
       enable = true;
