@@ -12,7 +12,7 @@
     # Include the results of the hardware scan.
     ./modules/nix.nix
     ./hardware-configuration.nix
-    ./sound.nix
+    ./modules/sound
     ./fonts.nix
     ./modules/git.nix
     ./modules/steam.nix
