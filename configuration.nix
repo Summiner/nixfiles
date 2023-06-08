@@ -266,7 +266,7 @@
 
   # this file is not created and it's required for networkmanager ipsec
   environment.etc."ipsec.secrets".text = ''
-
+    include ipsec.d/ipsec.nm-l2tp.secrets
   '';
 
   # Copy the NixOS configuration file and link it from the resulting system
