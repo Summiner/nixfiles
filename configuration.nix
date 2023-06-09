@@ -82,12 +82,13 @@
   cookiecutie.sound.pipewire.enable = true;
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
+  virtualisation.docker.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.uri = {
     isNormalUser = true;
     createHome = true;
-    extraGroups = ["wheel" "input" "adbusers" "plugdev"]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel" "input" "adbusers" "plugdev" "docker"]; # Enable ‘sudo’ for the user.
   };
 
   security.polkit.enable = true;
@@ -126,6 +127,17 @@
 
     home.sessionVariables = {
       MESA_DISK_CACHE_SINGLE_FILE = "1";
+    };
+
+    dconf.settings = {
+      "org/gnome/desktop/input-sources" = {
+        show-all-sources = true;
+        sources = [
+          (lib.hm.gvariant.mkTuple ["xkb" "us+altgr-intl"])
+          (lib.hm.gvariant.mkTuple ["xkb" "latam"])
+        ];
+        xkb-options = ["terminate:ctrl_alt_bksp"];
+      };
     };
 
     xdg.enable = true;
@@ -216,6 +228,7 @@
     vulkan-loader
     vulkan-tools
     sidequest
+    distrobox
 
     # wine-staging (version with experimental features)
     wineWowPackages.staging
