@@ -15,6 +15,7 @@ in
       home-manager.users.uri = {...}: {
         home.file."jdks/openjdk8".source = pkgs.jdk8;
         home.file."jdks/openjdk11".source = pkgs.jdk11;
+        home.file."jdks/openjdk17".source = pkgs.jdk17;
 
         home.packages = with pkgs; [
           jdk
