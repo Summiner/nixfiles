@@ -88,7 +88,7 @@
   users.users.uri = {
     isNormalUser = true;
     createHome = true;
-    extraGroups = ["wheel" "input" "adbusers" "plugdev" "docker"]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel" "input" "adbusers" "plugdev" "docker" "dialout"]; # Enable ‘sudo’ for the user.
   };
 
   security.polkit.enable = true;
