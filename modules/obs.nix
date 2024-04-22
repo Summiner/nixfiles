@@ -12,7 +12,7 @@ in
     };
 
     config = mkIf cfg.enable {
-      home-manager.users.uri = {...}: {
+      home-manager.users.jamie = {...}: {
         home.packages = with pkgs; [
           ffmpeg_5-full
           gst_all_1.gstreamer

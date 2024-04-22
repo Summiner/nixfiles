@@ -11,20 +11,20 @@ in
       enable = mkEnableOption "Enables and configures git";
       name = mkOption rec {
         type = types.str;
-        default = "Uriel";
+        default = "Summiner";
         description = "Username to use with git";
         example = default;
       };
       email = mkOption rec {
         type = types.str;
-        default = "imurx@proton.me";
+        default = "summiner13@gmail.com";
         description = "Email to use with git";
         example = default;
       };
     };
 
     config = mkIf cfg.enable {
-      home-manager.users.uri = {...}: {
+      home-manager.users.jamie = {...}: {
         programs.git = {
           enable = true;
           package = pkgs.gitFull;

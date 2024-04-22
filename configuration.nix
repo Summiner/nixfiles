@@ -19,9 +19,7 @@
     ./modules/jetbrains.nix
     ./modules/js.nix
     ./modules/java.nix
-    ./modules/rust.nix
     ./modules/obs.nix
-    ./modules/yubikey.nix
   ];
 
   nix.settings = {
@@ -40,7 +38,7 @@
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
-  time.timeZone = "America/Argentina/Buenos_Aires";
+  time.timeZone = "America/Chicago";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -48,17 +46,11 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = lib.mkForce "us";
-    useXkbConfig = true; # use xkbOptions in tty.
-  };
 
   # Enable the X11 windowing system.
   #.x.enable = true;
   programs.xwayland.enable = true;
   services.xserver.enable = true;
-  # services.xserver.videoDrivers = ["amdgpu"];
 
   # Enable the GNOME Desktop Environment.
   # services.xserver.displayManager.gdm.enable = true;
@@ -91,9 +83,6 @@
   services.xserver.displayManager.defaultSession = "plasma";
   programs.dconf.enable = true;
 
-  environment.variables.EXILED_References = "/home/uri/referenciasdelicht";
-  environment.variables.SL_REFERENCES = "/home/uri/referenciasdelicht";
-
   # Configure keymap in X11
   # services.xserver.layout = "us";
   # services.xserver.xkbOptions = {
@@ -102,10 +91,10 @@
   # };
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
-  services.printing.drivers = with pkgs; [
-    postscript-lexmark
-  ];
+  # services.printing.enable = true;
+  # services.printing.drivers = with pkgs; [
+  #   postscript-lexmark
+  # ];
 
   # Enable sound.
   #sound.enable = true;
@@ -119,7 +108,7 @@
   virtualisation.docker.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.uri = {
+  users.users.jamie = {
     isNormalUser = true;
     createHome = true;
     extraGroups = ["wheel" "input" "adbusers" "plugdev" "docker" "dialout"]; # Enable ‘sudo’ for the user.
@@ -139,7 +128,6 @@
     ...
   }: {
     home.stateVersion = "23.05";
-    # imports = [inputs.nix-doom-emacs.hmModule];
 
     systemd.user.targets.tray = {
       Unit = {
@@ -168,27 +156,14 @@
       python310Packages.toml
       python310Packages.aiohttp
       gimp
-      aegisub
       # old electron in EoL
-      # r2modman
-      unityhub
+      r2modman
       imv
       dotnet-sdk_7
       mono
-      xivlauncher
-      alsa-scarlett-gui
-      syncthingtray-minimal
     ];
 
     services.easyeffects.enable = true;
-
-    services.syncthing = {
-      enable = true;
-      tray = {
-        enable = true;
-        command = "syncthingtray --wait";
-      };
-    };
 
     home.sessionVariables = {
       MESA_DISK_CACHE_SINGLE_FILE = "1";
@@ -215,40 +190,12 @@
 
     qt.platformTheme = "kde";
 
-    xdg.enable = true;
-    xdg.mimeApps = {
-      enable = true;
-      defaultApplications = {
-        "image" = ["imv.desktop"];
-        "video" = ["mpv.desktop"];
-        "text/html" = ["firefox.desktop"];
-        "x-scheme-handler/http" = ["firefox.desktop"];
-        "x-scheme-handler/https" = ["firefox.desktop"];
-        "x-scheme-handler/humble" = ["Humble-scheme-handler.desktop"];
-        "x-scheme-handler/ror2mm" = ["r2modman.desktop"];
-        "x-scheme-handler/termius" = ["Termius.desktop"];
-        "x-scheme-handler/ssh" = ["ktelnetservice5.desktop"];
-        "x-scheme-handler/heroic" = ["com.heroicgameslauncher.hgl.desktop"];
-      };
-    };
-
     programs.direnv.enable = true;
     programs.direnv.enableBashIntegration = true;
     programs.bash.enable = true;
 
-    # programs.doom-emacs = {
-    #   # emacsPackages = with inputs.emacs-overlay.packages.${config.nixpkgs.system};
-    #   #   emacsPackagesFor emacsGit;
-    #   enable = true;
-    #   doomPrivateDir = ./doom.d; # Directory containing your config.el, init.el
-    #   # and packages.el files
-    # };
-
     home.sessionVariables = {
       MOZ_ENABLE_WAYLAND = 1;
-    };
-    home.shellAliases = {
-      love = "echo 'Edu: Te amo Uri <3'";
     };
   };
 
@@ -262,12 +209,9 @@
   uri.steam.enable = true;
   uri.vscode.enable = true;
   uri.jetbrains.enable = true;
-  uri.rust.enable = true;
   uri.java.enable = true;
   uri.javascript.enable = true;
   uri.obs.enable = true;
-  # 指
-  uri.yubi.enable = true;
   programs.adb.enable = true;
   programs.nix-ld.enable = true;
   programs.gamemode = {
@@ -285,9 +229,6 @@
     };
   };
 
-  # Apple
-  services.usbmuxd.enable = true;
-
   # programs.git.enable = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -301,8 +242,7 @@
         pkgs.fx-cast-bridge
       ];
     })
-    chromium
-    vim-full # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    nano
     wget
     tree
     neofetch
@@ -315,21 +255,15 @@
     pciutils
     usbutils
     dig
-    asciinema
     ripgrep # a better grep
     unzip
     ncdu_1 # _2 only supports modern microarchs
     fd # a better find
     hyperfine # a better time
     mtr # a better traceroute
-    tmux # when you can't afford i3
-    youtube-dl
+    tilix
     yt-dlp # do some pretendin' and fetch videos
-    jq # like 'node -e' but nicer
     btop # htop on steroids
-    expect # color capture, galore
-    caddy # convenient bloated web server
-    parallel # --citation
     nix-tree # nix what-depends why-depends who-am-i
     libayatana-appindicator
     wl-clipboard
@@ -343,12 +277,9 @@
     vulkan-headers
     vulkan-loader
     vulkan-tools
-    sidequest
-    distrobox
     pavucontrol
     docker-compose
-    distrobox
-    epiphany
+    # distrobox
     kdePackages.kdeconnect-kde
     kdePackages.kleopatra
 
@@ -361,23 +292,13 @@
     dxvk
     protontricks
 
-    (lutris.override {
-      extraLibraries = pkgs: [
-        # List library dependencies here
-      ];
-    })
-    heroic
     pkgsi686Linux.gperftools
-
-    # Apple
-    libimobiledevice
-    ifuse # optional, to mount using 'ifuse'
 
     rocmPackages.rocminfo
     rocmPackages.rocm-smi
   ];
 
-  services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
+  # services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
   services.upower.enable = true;
 
   xdg = {
@@ -395,8 +316,8 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  services.fwupd.enable = true;
+  services.openssh.enable = false;
+  services.fwupd.enable = false;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
