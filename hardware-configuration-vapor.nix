@@ -26,17 +26,17 @@
   ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/f66eca28-c5e9-4a9d-ba5d-17d9cb43d42a";
+    device = "/dev/disk/by-uuid/08e1ef1c-4730-4387-ab43-25ee80bd47f9";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/985D-9B8A";
+    device = "/dev/disk/by-uuid/67C6-0103";
     fsType = "vfat";
   };
 
   fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/004a816f-9715-4515-9dac-ca261aa2e7d9";
+    device = "/dev/disk/by-uuid/08e1ef1c-4730-4387-ab43-25ee80bd47f9";
     fsType = "ext4";
   };
 
