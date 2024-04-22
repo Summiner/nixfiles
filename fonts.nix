@@ -14,6 +14,7 @@ in
     config.fonts = mkIf cfg.enable {
       enableDefaultFonts = true;
       fonts = with pkgs; [
+        poppins
         noto-fonts
         noto-fonts-cjk
         noto-fonts-emoji
@@ -36,7 +37,7 @@ in
       fontconfig = {
         defaultFonts = {
           monospace = ["JetBrains Mono"];
-          sansSerif = ["Inter"];
+          sansSerif = ["poppins"];
           # serif is ew, <--- very based
         };
       };
