@@ -31,11 +31,17 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"];
+  boot.supportedFilesystems = [ "ntfs" ];
   virtualisation.waydroid.enable = true;
 
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+
+  networking.extraHosts =
+    ''
+      0.0.0.0 accounts.jetbrains.com account.jetbrains.com www-weighted.jetbrains.com
+    '';
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -122,7 +128,7 @@
 
   security.polkit.enable = true;
 
-  home-manager.users.uri = {
+  home-manager.users.jamie = {
     config,
     lib,
     ...
@@ -161,6 +167,11 @@
       imv
       dotnet-sdk_7
       mono
+      fuse
+      ntfs3g
+      mitmproxy
+      screen
+      unrar
     ];
 
     services.easyeffects.enable = true;

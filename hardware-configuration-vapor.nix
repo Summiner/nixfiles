@@ -26,17 +26,17 @@
   ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/08e1ef1c-4730-4387-ab43-25ee80bd47f9";
+    device = "/dev/disk/by-label/root";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/67C6-0103";
+    device = "/dev/disk/by-label/boot";
     fsType = "vfat";
   };
 
   fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/08e1ef1c-4730-4387-ab43-25ee80bd47f9";
+    device = "/dev/disk/by-label/root";
     fsType = "ext4";
   };
 
