@@ -54,15 +54,15 @@
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   ### AMD STUFF
-  hardware.opengl = {
+  hardware.graphics = {
     # Mesa
     enable = true;
     extraPackages = with pkgs; [mangohud amdvlk rocm-opencl-icd];
     extraPackages32 = with pkgs; [mangohud driversi686Linux.amdvlk];
 
     # Vulkan
-    driSupport = true;
-    driSupport32Bit = true;
+    #driSupport = true;
+    #driSupport32Bit = true;
   };
 
   # Force radv

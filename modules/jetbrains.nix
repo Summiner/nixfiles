@@ -15,7 +15,7 @@ in
       home-manager.users.jamie = {...}: {
         home.packages = with pkgs; [
           jetbrains.rider
-          jetbrains.idea-ultimate
+          jetbrains.idea-community
         ];
       };
     };

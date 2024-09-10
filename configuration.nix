@@ -80,15 +80,18 @@
   #   }
   # ];
 
+
   # Enable KDE
-  services.xserver.displayManager.sddm = {
+  services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
   };
   services.desktopManager.plasma6.enable = true;
-  services.xserver.displayManager.defaultSession = "plasma";
+  services.displayManager.defaultSession = "plasma";
   programs.dconf.enable = true;
-
+  
+  services.mullvad-vpn.enable = true;
+  services.mullvad-vpn.package = pkgs.mullvad-vpn;
   # Configure keymap in X11
   # services.xserver.layout = "us";
   # services.xserver.xkbOptions = {
@@ -110,7 +113,7 @@
   hardware.logitech.wireless.enableGraphical = true;
   cookiecutie.sound.pipewire.enable = true;
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
   virtualisation.docker.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -143,14 +146,13 @@
     };
 
     home.packages = with pkgs; [
-      blender-hip
       thunderbird
       vesktop
-      anydesk
+      mako
       termius
       inkscape-with-extensions
       xorg.xeyes
-      prismlauncher
+      (prismlauncher.override {withWaylandGLFW = true;}) #yoink, thanks uriel
       element-desktop
       mpv
       qbittorrent
@@ -172,6 +174,11 @@
       mitmproxy
       screen
       unrar
+      aseprite
+      godot_4
+      gnupg
+      monero-gui
+      fritzing
     ];
 
     services.easyeffects.enable = true;
@@ -254,6 +261,7 @@
       ];
     })
     nano
+    nvim
     wget
     tree
     neofetch
@@ -305,8 +313,11 @@
 
     pkgsi686Linux.gperftools
 
+    python312Packages.torchWithRocm
+
     rocmPackages.rocminfo
     rocmPackages.rocm-smi
+    libGL
   ];
 
   # services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
@@ -354,5 +365,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.11"; # Did you read the comment?
+  system.stateVersion = "unstable"; # Did you read the comment?
 }
