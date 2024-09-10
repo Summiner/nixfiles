@@ -261,7 +261,7 @@
       ];
     })
     nano
-    nvim
+    neovim
     wget
     tree
     neofetch
